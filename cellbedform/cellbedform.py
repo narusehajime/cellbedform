@@ -8,6 +8,13 @@ Nishimori, H., & Ouchi, N. (1993). Formation of ripple
 
 .. codeauthor:: Hajime Naruse
 
+Example
+---------------
+from cellbedform import CellBedform
+cb = CellBedform(grid=(100,100))
+cb.run(200)
+cb.save_images('bedform')
+
 """
 
 import numpy as np
@@ -182,21 +189,30 @@ class CellBedform():
 
         """
 
-        print('Saving an image sequence...')
-
         try:
             if len(self.ims) == 0:
                 raise Exception('Run the model before saving images.')
 
             for i in range(len(self.ims)):
-                plt.cla()
-                self.ax.add_collection3d(self.ims[i][0])
+                # show progress
+                print('', end='\r')
+                print(
+                    'Saving an image sequence...{:.1f}%'.format(
+                        i / len(self.ims) * 100),
+                    end='\r')
+
+                # Save images
+                plt.cla()  # Clear axes
+                self.ax.add_collection3d(self.ims[i][0])  # Load surface plot
                 self.ax.autoscale_view()
                 self.ax.set_zlim3d(-20, 150)
                 self.ax.set_xlabel('Distance (X)')
                 self.ax.set_ylabel('Distance (Y)')
                 self.ax.set_zlabel('Elevation')
                 plt.savefig(filename + '{:04d}.png'.format(i))
+
+            self.ims = []
+            print('done. All data were saved and cleared.')
 
         except FileNotFoundError:
             print('cannot find directory/files')
@@ -219,8 +235,11 @@ class CellBedform():
             respectively.
         """
         try:
+            if self.ims == []:
+                raise Exception('Run the model before saving data.')
+
             ani = animation.ArtistAnimation(self.f, self.ims, interval=100)
-            print("Saving a movie file. It may take several minutes...")
+            print("Saving a movie file. It may take several 10s minutes...")
 
             # Check the file format
             if format == 'mp4':
@@ -235,6 +254,8 @@ class CellBedform():
         except ValueError:
             print('Movie format is not supported in this environment. \
                 Install ffmpeg or imagemagick for mp4 or gif formats.')
+        except Exception:
+            print(Exception)
 
 
 if __name__ == "__main__":
