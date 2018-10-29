@@ -1,0 +1,19 @@
+MARSLOBES
+========================
+
+This is a code for inverse analysis of lobate deposits on Mars.
+
+---------------
+Installation
+
+python setup.py sdist
+
+---------------
+Test codes
+
+python setup.py test
+
+---------------
+How to use MARSLOBES
+
+

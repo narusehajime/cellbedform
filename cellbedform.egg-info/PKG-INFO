@@ -1,0 +1,57 @@
+Metadata-Version: 1.0
+Name: cellbedform
+Version: 0.1.0
+Summary: Cell model for simulatin self-organized bedform formation
+Home-page: https://github.com/narusehajime/cellbedform
+Author: Hajime Naruse
+Author-email: naruse@kueps.kyoto-u.ac.jp
+License: cellbedform Copyright 2018 Hajime Naruse
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Description: CELLBEDFORM
+        ========================
+        
+        This is a code for a simple cell model simulation of self-organized bedform. The model is based on Nishimori and Ouchi (1993). 
+        
+        ---------------
+        Installation
+        
+        python setup.py sdist
+        
+        ---------------
+        Test codes
+        
+        python setup.py test
+        
+        ---------------
+        Usage
+        
+        After installation, use the following commands.
+        
+        > from cellbedform import CellBedform
+        > cb = CellBedform(grid=(100,100))
+        > cb.run(steps=150)
+        > cb.save_images('bedform')
+        
+        This will save calculation results by as an image sequence. To show the final
+        result,
+        
+        > cb.show()
+        
+        The following command will produce the animation movie using ffmpeg or
+        imagemagick. However, this is not recommended because it is extremely slow.
+        Instead, some softwares such as virtualDub can produce a movie file from
+        the image sequence.
+        
+        > cb.animation(filename='bedform.gif', format='gif')
+        
+        
+        
+        
+        
+Platform: UNKNOWN
